@@ -11,7 +11,7 @@ namespace Unit06
         // ----------------------------------------------------------------------------------------- 
 
         // GAME
-        public static string GAME_NAME = "Batter";
+        public static string GAME_NAME = "Prison Break Frogger";
         public static int FRAME_RATE = 60;
 
         // SCREEN
@@ -21,7 +21,7 @@ namespace Unit06
         public static int CENTER_Y = SCREEN_HEIGHT / 2;
 
         // FIELD
-        public static int FIELD_TOP = 60;
+        public static int FIELD_TOP = 0;
         public static int FIELD_BOTTOM = SCREEN_HEIGHT;
         public static int FIELD_LEFT = 0;
         public static int FIELD_RIGHT = SCREEN_WIDTH;
@@ -49,6 +49,8 @@ namespace Unit06
         // KEYS
         public static string LEFT = "left";
         public static string RIGHT = "right";
+        public static string UP = "up";
+        public static string DOWN = "down";
         public static string SPACE = "space";
         public static string ENTER = "enter";
         public static string PAUSE = "p";
@@ -62,7 +64,7 @@ namespace Unit06
 
         // LEVELS
         public static string LEVEL_FILE = "Assets/Data/level-{0:000}.txt";
-        public static int BASE_LEVELS = 5;
+        public static int BASE_LEVELS = 3;
 
         // ----------------------------------------------------------------------------------------- 
         // SCRIPTING CONSTANTS
@@ -95,84 +97,121 @@ namespace Unit06
         public static string LIVES_FORMAT = "LIVES: {0}";
         public static string SCORE_FORMAT = "SCORE: {0}";
 
-        // BALL
-        public static string BALL_GROUP = "balls";
-        public static string BALL_IMAGE = "Assets/Images/000.png";
-        public static int BALL_WIDTH = 28;
-        public static int BALL_HEIGHT = 28;
-        public static int BALL_VELOCITY = 6;
-
-        // RACKET
-        public static string RACKET_GROUP = "rackets";
+        // FROG
+        public static string FROG_GROUP = "frogs";
         
-        public static List<string> RACKET_IMAGES
+        public static List<string> FROG_IMAGES
             = new List<string>() {
-                "Assets/Images/100.png",
-                "Assets/Images/101.png",
-                "Assets/Images/102.png"
+                "Assets/Images/5001.png",
+                "Assets/Images/5002.png"
+            };
+        public static int FROG_SIT_SPRITE_INDEX = 0;
+        public static int FROG_JUMP_SPRITE_INDEX = 1;
+
+        public static int FROG_SIT_SPRITE_WIDTH = 288;
+        public static int FROG_SIT_SPRITE_HEIGHT = 288;
+        public static int FROG_JUMP_SPRITE_WIDTH = 288;
+        public static int FROG_JUMP_SPRITE_HEIGHT = 384;
+        public static double FROG_SPRITE_SCALE = 0.1;
+        public static int FROG_JUMP_ACCELERATION = -1;
+        public static int FROG_JUMP_INIT_VELOCITY = 5;
+
+        // CARS
+        public static string CAR_GROUP = "cars";
+        
+        public static List<string> CAR_IMAGES
+            = new List<string>() {
+                "Assets/Images/6001.png",
+                "Assets/Images/6002.png",
+                "Assets/Images/6003.png",
+                "Assets/Images/6004.png",
+                "Assets/Images/6005.png"
             };
 
-        public static int RACKET_WIDTH = 106;
-        public static int RACKET_HEIGHT = 28;
-        public static int RACKET_RATE = 6;
-        public static int RACKET_VELOCITY = 7;
+        public static int CAR_SPRITE_WIDTH = 576;
+        public static int CAR_SPRITE_HEIGHT = 288;
+        public static double CAR_SPRITE_SCALE = 0.1;
+        public static int POLICE_CAR_INDEX = 4;
+        public static int CAR_VELOCITY = 5;
+        public static int POLICE_CAR_VELOCITY = 7;
 
-        // BRICK
-        public static string BRICK_GROUP = "bricks";
+        // TRICYCLES
+        public static string TRICYCLE_GROUP = "tricycles";
+
+        public static List<string> TRICYCLE_IMAGES
+            = new List<string>() {
+                "Assets/Images/7001.png",
+                "Assets/Images/7002.png",
+                "Assets/Images/7003.png",
+                "Assets/Images/7004.png",
+                "Assets/Images/7005.png"
+            };
         
-        public static Dictionary<string, List<string>> BRICK_IMAGES
+        public static int TRICYCLE_SPRITE_WIDTH = 288;
+        public static int TRICYCLE_SPRITE_HEIGHT = 288;
+        public static double TRICYCLE_SPRITE_SCALE = 0.1;
+        public static int TRICYCLE_VELOCITY = 3;
+
+        // TILES
+        public static string TILE_GROUP = "tiles";
+        
+        public static Dictionary<string, List<string>> TILE_IMAGES
             = new Dictionary<string, List<string>>() {
-                { "b", new List<string>() {
-                    "Assets/Images/010.png",
-                    "Assets/Images/011.png",
-                    "Assets/Images/012.png",
-                    "Assets/Images/013.png",
-                    "Assets/Images/014.png",
-                    "Assets/Images/015.png",
-                    "Assets/Images/016.png",
-                    "Assets/Images/017.png",
-                    "Assets/Images/018.png"
+                { "gg", new List<string>() {
+                    "Assets/Images/0001.png",
+                    "Assets/Images/0002.png",
+                    "Assets/Images/0003.png",
+                    "Assets/Images/0004.png",
+                    "Assets/Images/0101.png",
+                    "Assets/Images/0102.png",
+                    "Assets/Images/0103.png",
+                    "Assets/Images/0104.png",
                 } },
-                { "g", new List<string>() {
-                    "Assets/Images/020.png",
-                    "Assets/Images/021.png",
-                    "Assets/Images/022.png",
-                    "Assets/Images/023.png",
-                    "Assets/Images/024.png",
-                    "Assets/Images/025.png",
-                    "Assets/Images/026.png",
-                    "Assets/Images/027.png",
-                    "Assets/Images/028.png"
+                { "gr", new List<string>() {
+                    "Assets/Images/1001.png",
+                    "Assets/Images/1002.png",
+                    "Assets/Images/1003.png",
+                    "Assets/Images/1004.png",
+                    "Assets/Images/1005.png",
+                    "Assets/Images/1006.png",
+                    "Assets/Images/1007.png",
+                    "Assets/Images/1008.png",
+                    "Assets/Images/1101.png",
+                    "Assets/Images/1102.png",
+                    "Assets/Images/1103.png",
+                    "Assets/Images/1104.png",
+                    "Assets/Images/1105.png",
+                    "Assets/Images/1106.png",
+                    "Assets/Images/1107.png",
+                    "Assets/Images/1108.png"
                 } },
-                { "p", new List<string>() {
-                    "Assets/Images/030.png",
-                    "Assets/Images/031.png",
-                    "Assets/Images/032.png",
-                    "Assets/Images/033.png",
-                    "Assets/Images/034.png",
-                    "Assets/Images/035.png",
-                    "Assets/Images/036.png",
-                    "Assets/Images/037.png",
-                    "Assets/Images/038.png"
+                { "rr", new List<string>() {
+                    "Assets/Images/2001.png",
+                    "Assets/Images/2002.png",
+                    "Assets/Images/2003.png"
                 } },
-                { "y", new List<string>() {
-                    "Assets/Images/040.png",
-                    "Assets/Images/041.png",
-                    "Assets/Images/042.png",
-                    "Assets/Images/043.png",
-                    "Assets/Images/044.png",
-                    "Assets/Images/045.png",
-                    "Assets/Images/046.png",
-                    "Assets/Images/047.png",
-                    "Assets/Images/048.png"
+                { "gw", new List<string>() {
+                    "Assets/Images/3001.png",
+                    "Assets/Images/3002.png",
+                    "Assets/Images/3003.png",
+                    "Assets/Images/3004.png",
+                    "Assets/Images/3005.png",
+                    "Assets/Images/3006.png",
+                    "Assets/Images/3007.png",
+                    "Assets/Images/3008.png"
+                } },
+                { "ww", new List<string>() {
+                    "Assets/Images/4001.png",
+                    "Assets/Images/4101.png",
+                    "Assets/Images/4102.png",
+                    "Assets/Images/4103.png",
+                    "Assets/Images/4104.png",
+                    "Assets/Images/4105.png"
                 } }
         };
 
-        public static int BRICK_WIDTH = 80;
-        public static int BRICK_HEIGHT = 28;
-        public static double BRICK_DELAY = 0.5;
-        public static int BRICK_RATE = 4;
-        public static int BRICK_POINTS = 50;
+        public static int TILE_SIZE = 320;
+        public static double TILE_SCALE = 0.1;
 
         // DIALOG
         public static string DIALOG_GROUP = "dialogs";

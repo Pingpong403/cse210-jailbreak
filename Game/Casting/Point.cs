@@ -85,5 +85,26 @@ namespace Unit06.Game.Casting
             int y = this._y * factor;
             return new Point(x, y);
         }
+
+        /// <summary>
+        /// Add the acceleration to the current point, which should represent
+        /// a velocity.
+        /// </summary>
+        /// <param name="acc">The acceleration.</param>
+        /// <returns>The new, accelerated point.</returns>
+        public Point Accelerate(int acc)
+        {
+            int x = _x;
+            int y = _y;
+            if (_x != 0)
+            {
+                x = _x + (_x > 0 ? acc : acc * -1);
+            }
+            else if (_y != 0)
+            {
+                y = _y + (_y > 0 ? acc : acc * -1);
+            }
+            return new Point(x, y);
+        }
     }
 }

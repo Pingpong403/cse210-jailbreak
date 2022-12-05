@@ -128,10 +128,10 @@ namespace Unit06
                 "Assets/Images/6005.png"
             };
 
+        public static int POLICE_CAR_INDEX = 4;
         public static int CAR_SPRITE_WIDTH = 576;
         public static int CAR_SPRITE_HEIGHT = 288;
         public static double CAR_SPRITE_SCALE = 0.1;
-        public static int POLICE_CAR_INDEX = 4;
         public static int CAR_VELOCITY = 5;
         public static int POLICE_CAR_VELOCITY = 7;
 
@@ -151,6 +151,30 @@ namespace Unit06
         public static int TRICYCLE_SPRITE_HEIGHT = 288;
         public static double TRICYCLE_SPRITE_SCALE = 0.1;
         public static int TRICYCLE_VELOCITY = 3;
+
+        // LOGS
+        public static string LOG_GROUP = "logs";
+
+        public static List<string> LOG_IMAGES
+            = new List<string>() {
+                "Assets/Images/8001.png",
+                "Assets/Images/8101.png",
+                "Assets/Images/8102.png",
+                "Assets/Images/8103.png",
+                "Assets/Images/8104.png",
+                "Assets/Images/8105.png"
+            };
+
+        public static int LOG_SPRITE_WIDTH = 352;
+        public static int PLAIN_LOG_SPRITE_HEIGHT = 160;
+        public static int DETAIL_LOG_SPRITE_HEIGHT = 288;
+        public static double LOG_SPRITE_SCALE = 0.1;
+        public static List<int> LOG_VELOCITIES
+            = new List<int>() {
+                2,
+                3,
+                4
+            };
 
         // TILES
         public static string TILE_GROUP = "tiles";

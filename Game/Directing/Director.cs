@@ -15,7 +15,7 @@ namespace Unit06.Game.Directing
         private Script _script;
         private SceneManager _sceneManager;
         private VideoService _videoService;
-        
+
         /// <summary>
         /// Constructs a new instance of Director using the given VideoService.
         /// </summary>
@@ -33,7 +33,7 @@ namespace Unit06.Game.Directing
         {
             _sceneManager.PrepareScene(scene, _cast, _script);
         }
-        
+
         /// <summary>
         /// Starts the game by running the main game loop for the given cast and script.
         /// </summary>
@@ -55,10 +55,11 @@ namespace Unit06.Game.Directing
         private void ExecuteActions(string group)
         {
             List<Action> actions = _script.GetActions(group);
-            foreach(Action action in actions)
+            foreach (Action action in actions)
             {
                 action.Execute(_cast, _script, this);
             }
+
         }
     }
 }

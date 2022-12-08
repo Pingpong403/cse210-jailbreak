@@ -28,7 +28,7 @@ namespace Unit06.Game.Scripting
 
             Point position = body.GetPosition();
             // IMPLEMENT JUMP ANIMATION (NOT AN ANIMATION OBJECT) USING FILENAMES
-            Image image = new Image(Constants.FROG_IMAGES[Constants.FROG_SIT_SPRITE_INDEX]);
+            Image image = racket.GetImage();
             _videoService.DrawImage(image, position);
         }
     }

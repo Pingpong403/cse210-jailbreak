@@ -15,8 +15,10 @@ namespace Unit06
         public static int FRAME_RATE = 60;
 
         // SCREEN
-        public static int SCREEN_WIDTH = 1040;
-        public static int SCREEN_HEIGHT = 680;
+        public static int TILE_NUMBERS_WIDTH = 10;
+        public static int TILE_NUMBERS_HEIGHT = 16;
+        public static int SCREEN_WIDTH = (int)(TILE_SIZE * TILE_SCALE * TILE_NUMBERS_WIDTH);
+        public static int SCREEN_HEIGHT = (int)(TILE_SIZE * TILE_SCALE * TILE_NUMBERS_HEIGHT);
         public static int CENTER_X = SCREEN_WIDTH / 2;
         public static int CENTER_Y = SCREEN_HEIGHT / 2;
 
@@ -63,8 +65,9 @@ namespace Unit06
         public static string GAME_OVER = "game_over";
 
         // LEVELS
-        public static string LEVEL_FILE = "Assets/Data/level-{0:000}.txt";
-        public static int BASE_LEVELS = 3;
+        public static string LEVEL_TILES_FILE = "Assets/Data/TileMaps/level-{0:000}.txt";
+        public static string LEVEL_OBSTACLES_FILE = "Assets/Data/ObstacleMaps/level-{0:000}.txt";
+        public static int BASE_LEVELS = 1;
 
         // ----------------------------------------------------------------------------------------- 
         // SCRIPTING CONSTANTS
@@ -105,19 +108,21 @@ namespace Unit06
                 "Assets/Images/5001.png",
                 "Assets/Images/5002.png"
             };
-        public static int FROG_SIT_SPRITE_INDEX = 0;
-        public static int FROG_JUMP_SPRITE_INDEX = 1;
+        public static int FROG_SIT_INDEX = 0;
+        public static int FROG_JUMP_INDEX = 1;
 
-        public static int FROG_SIT_SPRITE_WIDTH = 288;
-        public static int FROG_SIT_SPRITE_HEIGHT = 288;
-        public static int FROG_JUMP_SPRITE_WIDTH = 288;
-        public static int FROG_JUMP_SPRITE_HEIGHT = 384;
-        public static double FROG_SPRITE_SCALE = 0.1;
+        public static int FROG_WIDTH = 288;
+        public static int FROG_SIT_HEIGHT = 288;
+        public static int FROG_JUMP_HEIGHT = 384;
+        public static int FROG_JUMP_VERTICAL_CENTER = 176;
+        public static double FROG_SCALE = 0.1;
         public static int FROG_JUMP_ACCELERATION = -1;
         public static int FROG_JUMP_INIT_VELOCITY = 5;
 
+        // OBSTACLES
+        public static string OBSTACLE_GROUP = "obstacles";
+
         // CARS
-        public static string CAR_GROUP = "cars";
         
         public static List<string> CAR_IMAGES
             = new List<string>() {
@@ -129,14 +134,13 @@ namespace Unit06
             };
 
         public static int POLICE_CAR_INDEX = 4;
-        public static int CAR_SPRITE_WIDTH = 576;
-        public static int CAR_SPRITE_HEIGHT = 288;
-        public static double CAR_SPRITE_SCALE = 0.1;
+        public static int CAR_WIDTH = 576;
+        public static int CAR_HEIGHT = 288;
+        public static double CAR_SCALE = 0.1;
         public static int CAR_VELOCITY = 5;
         public static int POLICE_CAR_VELOCITY = 7;
 
         // TRICYCLES
-        public static string TRICYCLE_GROUP = "tricycles";
 
         public static List<string> TRICYCLE_IMAGES
             = new List<string>() {
@@ -147,13 +151,12 @@ namespace Unit06
                 "Assets/Images/7005.png"
             };
         
-        public static int TRICYCLE_SPRITE_WIDTH = 288;
-        public static int TRICYCLE_SPRITE_HEIGHT = 288;
-        public static double TRICYCLE_SPRITE_SCALE = 0.1;
+        public static int TRICYCLE_WIDTH = 288;
+        public static int TRICYCLE_HEIGHT = 288;
+        public static double TRICYCLE_SCALE = 0.1;
         public static int TRICYCLE_VELOCITY = 3;
 
         // LOGS
-        public static string LOG_GROUP = "logs";
 
         public static List<string> LOG_IMAGES
             = new List<string>() {
@@ -165,15 +168,15 @@ namespace Unit06
                 "Assets/Images/8105.png"
             };
 
-        public static int LOG_SPRITE_WIDTH = 352;
-        public static int PLAIN_LOG_SPRITE_HEIGHT = 160;
-        public static int DETAIL_LOG_SPRITE_HEIGHT = 288;
-        public static double LOG_SPRITE_SCALE = 0.1;
+        public static int LOG_WIDTH = 352;
+        public static int PLAIN_LOG_HEIGHT = 160;
+        public static int DETAIL_LOG_HEIGHT = 288;
+        public static double LOG_SCALE = 0.1;
         public static List<int> LOG_VELOCITIES
             = new List<int>() {
                 2,
-                3,
-                4
+                4,
+                6
             };
 
         // TILES
@@ -196,14 +199,16 @@ namespace Unit06
                     "Assets/Images/1002.png",
                     "Assets/Images/1003.png",
                     "Assets/Images/1004.png",
+                    "Assets/Images/1101.png",
+                    "Assets/Images/1102.png",
+                    "Assets/Images/1103.png",
+                    "Assets/Images/1104.png"
+                } },
+                { "rg", new List<string>() {
                     "Assets/Images/1005.png",
                     "Assets/Images/1006.png",
                     "Assets/Images/1007.png",
                     "Assets/Images/1008.png",
-                    "Assets/Images/1101.png",
-                    "Assets/Images/1102.png",
-                    "Assets/Images/1103.png",
-                    "Assets/Images/1104.png",
                     "Assets/Images/1105.png",
                     "Assets/Images/1106.png",
                     "Assets/Images/1107.png",
@@ -218,7 +223,9 @@ namespace Unit06
                     "Assets/Images/3001.png",
                     "Assets/Images/3002.png",
                     "Assets/Images/3003.png",
-                    "Assets/Images/3004.png",
+                    "Assets/Images/3004.png"
+                } },
+                { "wg", new List<string>() {
                     "Assets/Images/3005.png",
                     "Assets/Images/3006.png",
                     "Assets/Images/3007.png",

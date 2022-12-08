@@ -10,6 +10,7 @@ namespace Unit06.Game.Casting
         private Body _body;
         private List<Image> _images= new List<Image>();
         private Image _image;
+        private int _direction;
         
         /// <summary>
         /// Constructs a new instance of Frog.
@@ -19,6 +20,7 @@ namespace Unit06.Game.Casting
             this._body = body;
             this._images = images;
             this._image = this._images[Constants.FROG_SIT_INDEX];
+            this._direction = 0;
         }
 
         /// <summary>
@@ -58,7 +60,8 @@ namespace Unit06.Game.Casting
         {
             Point velocity = new Point(-Constants.FROG_JUMP_INIT_VELOCITY, 0);
             _body.SetVelocity(velocity);
-            this._image = this._images[Constants.FROG_JUMP_INDEX];
+            this._image = this._images[Constants.FROG_JUMP_INDEX + 6];
+            _direction = 3;
         }
 
         /// <summary>
@@ -68,7 +71,8 @@ namespace Unit06.Game.Casting
         {
             Point velocity = new Point(Constants.FROG_JUMP_INIT_VELOCITY, 0);
             _body.SetVelocity(velocity);
-            this._image = this._images[Constants.FROG_JUMP_INDEX];
+            this._image = this._images[Constants.FROG_JUMP_INDEX + 2];
+            _direction = 1;
         }
 
         /// <summary>
@@ -79,6 +83,7 @@ namespace Unit06.Game.Casting
             Point velocity = new Point(0, -Constants.FROG_JUMP_INIT_VELOCITY);
             _body.SetVelocity(velocity);
             this._image = this._images[Constants.FROG_JUMP_INDEX];
+            _direction = 0;
         }
 
         /// <summary>
@@ -88,7 +93,8 @@ namespace Unit06.Game.Casting
         {
             Point velocity = new Point(0, Constants.FROG_JUMP_INIT_VELOCITY);
             _body.SetVelocity(velocity);
-            this._image = this._images[Constants.FROG_JUMP_INDEX];
+            this._image = this._images[Constants.FROG_JUMP_INDEX + 4];
+            _direction = 2;
         }
 
         /// <summary>
@@ -98,7 +104,7 @@ namespace Unit06.Game.Casting
         {
             Point velocity = new Point(0, 0);
             _body.SetVelocity(velocity);
-            this._image = this._images[Constants.FROG_SIT_INDEX];
+            this._image = this._images[Constants.FROG_SIT_INDEX + 2 * _direction];
         }
     }
 }

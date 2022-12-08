@@ -173,7 +173,12 @@ namespace Unit06.Game.Directing
                         Point velocity = new Point((direction == 0) ? Constants.TRICYCLE_VELOCITY : -Constants.TRICYCLE_VELOCITY, 0);
                         Body body = new Body(position, size, velocity);
 
-                        int randomIndex = _random.Next(Constants.TRICYCLE_IMAGES.Count);
+                        int randomIndexStartRange = 0;
+                        if (boolDirection)
+                        {
+                            randomIndexStartRange = Constants.TRICYCLE_IMAGES.Count / 2;
+                        }
+                        int randomIndex = _random.Next(randomIndexStartRange, randomIndexStartRange + Constants.TRICYCLE_IMAGES.Count / 2);
                         string fileName = Constants.TRICYCLE_IMAGES[randomIndex];
                         int rotation = (direction == 0) ? 90 : 0; 
                         Image image = new Image(fileName, Constants.TRICYCLE_SCALE, rotation);
@@ -192,7 +197,12 @@ namespace Unit06.Game.Directing
                         Point velocity = new Point((direction == 0) ? Constants.CAR_VELOCITY : -Constants.CAR_VELOCITY, 0);
                         Body body = new Body(position, size, velocity);
 
-                        int randomIndex = _random.Next(Constants.CAR_IMAGES.Count);
+                        int randomIndexStartRange = 0;
+                        if (boolDirection)
+                        {
+                            randomIndexStartRange = Constants.CAR_IMAGES.Count / 2;
+                        }
+                        int randomIndex = _random.Next(randomIndexStartRange, randomIndexStartRange + Constants.CAR_IMAGES.Count / 2);
                         string fileName = Constants.CAR_IMAGES[randomIndex];
                         int rotation = (direction == 0) ? 90 : 0; 
                         Image image = new Image(fileName, Constants.CAR_SCALE, rotation);
@@ -333,9 +343,6 @@ namespace Unit06.Game.Directing
             Label label = new Label(text, position);
             cast.AddActor(Constants.LIVES_GROUP, label);   
         }
-
-
-        // CHANGE TO ADD FROG
 
         private void AddFrog(Cast cast)
         {

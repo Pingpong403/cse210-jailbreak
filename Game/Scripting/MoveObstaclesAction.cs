@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Unit06.Game.Scripting
 {
-    public class MoveObstacleAction : Action
+    public class MoveObstaclesAction : Action
     {
-        public MoveObstacleAction()
+        public MoveObstaclesAction()
         {
         }
 
@@ -19,7 +19,8 @@ namespace Unit06.Game.Scripting
                 Body body = obstacle.GetBody();
                 Point position = body.GetPosition();
                 Point velocity = body.GetVelocity();
-                body.SetPosition(position.Add(velocity));
+                position = position.Add(velocity);
+                body.SetPosition(position);
             }
         }
     }

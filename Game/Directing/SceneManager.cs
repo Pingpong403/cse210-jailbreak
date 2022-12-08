@@ -114,7 +114,7 @@ namespace Unit06.Game.Directing
 
         private void PrepareInPlay(Cast cast, Script script)
         {
-            // ActivateBall(cast);
+            ActivateObstacles(cast);
             cast.ClearActors(Constants.DIALOG_GROUP);
 
             script.ClearAllActions();
@@ -412,8 +412,8 @@ namespace Unit06.Game.Directing
         {
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
-            // script.AddAction(Constants.OUTPUT, new DrawObstaclesAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawTilesAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new DrawObstaclesAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawRacketAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawDialogAction(VideoService));
             script.AddAction(Constants.OUTPUT, new EndDrawingAction(VideoService));
@@ -432,7 +432,7 @@ namespace Unit06.Game.Directing
 
         private void AddUpdateActions(Script script)
         {
-            // script.AddAction(Constants.UPDATE, new MoveBallAction());
+            script.AddAction(Constants.UPDATE, new MoveObstaclesAction());
             // script.AddAction(Constants.UPDATE, new MoveRacketAction());
             // script.AddAction(Constants.UPDATE, new CollideBordersAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CollideBrickAction(PhysicsService, AudioService));

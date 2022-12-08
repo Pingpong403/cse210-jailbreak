@@ -17,8 +17,8 @@ namespace Unit06
         // SCREEN
         public static int TILE_NUMBERS_WIDTH = 10;
         public static int TILE_NUMBERS_HEIGHT = 16;
-        public static int SCREEN_WIDTH = (int)(TILE_SIZE * TILE_SCALE * TILE_NUMBERS_WIDTH);
-        public static int SCREEN_HEIGHT = (int)(TILE_SIZE * TILE_SCALE * TILE_NUMBERS_HEIGHT);
+        public static int SCREEN_WIDTH = 320;
+        public static int SCREEN_HEIGHT = 512;
         public static int CENTER_X = SCREEN_WIDTH / 2;
         public static int CENTER_Y = SCREEN_HEIGHT / 2;
 
@@ -105,8 +105,14 @@ namespace Unit06
         
         public static List<string> FROG_IMAGES
             = new List<string>() {
-                "Assets/Images/5001.png",
-                "Assets/Images/5002.png"
+                "Assets/Images/5011.png",
+                "Assets/Images/5021.png",
+                "Assets/Images/5031.png",
+                "Assets/Images/5041.png",
+                "Assets/Images/5012.png",
+                "Assets/Images/5022.png",
+                "Assets/Images/5032.png",
+                "Assets/Images/5042.png"
             };
         public static int FROG_SIT_INDEX = 0;
         public static int FROG_JUMP_INDEX = 1;
@@ -130,7 +136,12 @@ namespace Unit06
                 "Assets/Images/6002.png",
                 "Assets/Images/6003.png",
                 "Assets/Images/6004.png",
-                "Assets/Images/6005.png"
+                "Assets/Images/6005.png",
+                "Assets/Images/6011.png",
+                "Assets/Images/6012.png",
+                "Assets/Images/6013.png",
+                "Assets/Images/6014.png",
+                "Assets/Images/6015.png"
             };
 
         public static int POLICE_CAR_INDEX = 4;
@@ -148,7 +159,12 @@ namespace Unit06
                 "Assets/Images/7002.png",
                 "Assets/Images/7003.png",
                 "Assets/Images/7004.png",
-                "Assets/Images/7005.png"
+                "Assets/Images/7005.png",
+                "Assets/Images/7011.png",
+                "Assets/Images/7012.png",
+                "Assets/Images/7013.png",
+                "Assets/Images/7014.png",
+                "Assets/Images/7015.png"
             };
         
         public static int TRICYCLE_WIDTH = 28;

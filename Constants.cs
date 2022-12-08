@@ -111,10 +111,10 @@ namespace Unit06
         public static int FROG_SIT_INDEX = 0;
         public static int FROG_JUMP_INDEX = 1;
 
-        public static int FROG_WIDTH = 288;
-        public static int FROG_SIT_HEIGHT = 288;
-        public static int FROG_JUMP_HEIGHT = 384;
-        public static int FROG_JUMP_VERTICAL_CENTER = 176;
+        public static int FROG_WIDTH = 28;
+        public static int FROG_SIT_HEIGHT = 28;
+        public static int FROG_JUMP_HEIGHT = 38;
+        public static int FROG_JUMP_VERTICAL_CENTER = 17;
         public static double FROG_SCALE = 0.1;
         public static int FROG_JUMP_ACCELERATION = -1;
         public static int FROG_JUMP_INIT_VELOCITY = 5;
@@ -134,8 +134,8 @@ namespace Unit06
             };
 
         public static int POLICE_CAR_INDEX = 4;
-        public static int CAR_WIDTH = 576;
-        public static int CAR_HEIGHT = 288;
+        public static int CAR_WIDTH = 57;
+        public static int CAR_HEIGHT = 28;
         public static double CAR_SCALE = 0.1;
         public static int CAR_VELOCITY = 5;
         public static int POLICE_CAR_VELOCITY = 7;
@@ -151,8 +151,8 @@ namespace Unit06
                 "Assets/Images/7005.png"
             };
         
-        public static int TRICYCLE_WIDTH = 288;
-        public static int TRICYCLE_HEIGHT = 288;
+        public static int TRICYCLE_WIDTH = 28;
+        public static int TRICYCLE_HEIGHT = 28;
         public static double TRICYCLE_SCALE = 0.1;
         public static int TRICYCLE_VELOCITY = 3;
 
@@ -168,9 +168,9 @@ namespace Unit06
                 "Assets/Images/8105.png"
             };
 
-        public static int LOG_WIDTH = 352;
-        public static int PLAIN_LOG_HEIGHT = 160;
-        public static int DETAIL_LOG_HEIGHT = 288;
+        public static int LOG_WIDTH = 35;
+        public static int PLAIN_LOG_HEIGHT = 16;
+        public static int DETAIL_LOG_HEIGHT = 28;
         public static double LOG_SCALE = 0.1;
         public static List<int> LOG_VELOCITIES
             = new List<int>() {
@@ -241,7 +241,7 @@ namespace Unit06
                 } }
         };
 
-        public static int TILE_SIZE = 320;
+        public static int TILE_SIZE = 32;
         public static double TILE_SCALE = 0.1;
 
         // DIALOG

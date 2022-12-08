@@ -1,4 +1,5 @@
 using Unit06.Game.Casting;
+using System.Collections.Generic;
 
 namespace Unit06.Game.Scripting
 {
@@ -10,7 +11,7 @@ namespace Unit06.Game.Scripting
 
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
-            Obstacle obstacles = (Obstacle)cast.GetActors(Constants.OBSTACLE_GROUP);
+            List<Actor> obstacles = cast.GetActors(Constants.OBSTACLE_GROUP);
             // int x = position.GetX();
 
             foreach (Obstacle obstacle in obstacles)

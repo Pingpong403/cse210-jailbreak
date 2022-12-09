@@ -26,10 +26,11 @@ namespace Unit06.Game.Scripting
             {
                 int maxX = Constants.SCREEN_WIDTH;
                 int maxY = Constants.SCREEN_HEIGHT;
-
+                
                 Body body = obstacle.GetBody();
                 Point position = body.GetPosition();
                 Point velocity = body.GetVelocity();
+
 
                 int x = ((position.GetX() + velocity.GetX()) + maxX) % maxX;
                 int y = ((position.GetY() + velocity.GetY()) + maxY) % maxY;

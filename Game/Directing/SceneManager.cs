@@ -119,8 +119,8 @@ namespace Unit06.Game.Directing
 
             script.ClearAllActions();
 
-            // ControlRacketAction action = new ControlRacketAction(KeyboardService);
-            // script.AddAction(Constants.INPUT, action);
+            ControlFrogAction action = new ControlFrogAction(KeyboardService);
+            script.AddAction(Constants.INPUT, action);
 
             AddUpdateActions(script);    
             AddOutputActions(script);
@@ -168,6 +168,8 @@ namespace Unit06.Game.Directing
 
                         int direction = (int)Char.GetNumericValue(rows[r][c][1]);
                         bool boolDirection = (direction == 0) ? true : false;
+                        x += (Constants.TILE_SIZE - Constants.TRICYCLE_WIDTH) / 2;
+                        y += (Constants.TILE_SIZE - Constants.TRICYCLE_HEIGHT) / 2;
                         Point position = new Point(x, y);
                         Point size = new Point((int)(Constants.TRICYCLE_WIDTH * Constants.TRICYCLE_SCALE), (int)(Constants.TRICYCLE_HEIGHT * Constants.TRICYCLE_SCALE));
                         Point velocity = new Point((direction == 0) ? Constants.TRICYCLE_VELOCITY : -Constants.TRICYCLE_VELOCITY, 0);
@@ -192,6 +194,8 @@ namespace Unit06.Game.Directing
 
                         int direction = (int)Char.GetNumericValue(rows[r][c][1]);
                         bool boolDirection = (direction == 0) ? true : false;
+                        x += (Constants.TILE_SIZE - (Constants.CAR_WIDTH / 2)) / 2;
+                        y += (Constants.TILE_SIZE - Constants.CAR_HEIGHT) / 2;
                         Point position = new Point(x, y);
                         Point size = new Point((int)(Constants.CAR_WIDTH * Constants.CAR_SCALE), (int)(Constants.CAR_HEIGHT * Constants.CAR_SCALE));
                         Point velocity = new Point((direction == 0) ? Constants.CAR_VELOCITY : -Constants.CAR_VELOCITY, 0);
@@ -217,6 +221,8 @@ namespace Unit06.Game.Directing
                         int direction = 1;
                         int logSpeedIndex = (int)Char.GetNumericValue(rows[r][c][1]);
                         bool boolDirection = (direction == 0) ? true : false;
+                        x += (Constants.TILE_SIZE - Constants.LOG_WIDTH) / 2;
+                        y += (Constants.TILE_SIZE - Constants.PLAIN_LOG_HEIGHT) / 2;
                         Point position = new Point(x, y);
                         Point size = new Point((int)(Constants.LOG_WIDTH * Constants.LOG_SCALE), (int)(Constants.PLAIN_LOG_HEIGHT * Constants.LOG_SCALE));
                         Point velocity = new Point(-Constants.LOG_VELOCITIES[logSpeedIndex], 0);
@@ -440,7 +446,8 @@ namespace Unit06.Game.Directing
         private void AddUpdateActions(Script script)
         {
             script.AddAction(Constants.UPDATE, new MoveObstaclesAction());
-            // script.AddAction(Constants.UPDATE, new MoveRacketAction());
+            script.AddAction(Constants.UPDATE, new MoveFrogAction());
+            script.AddAction(Constants.UPDATE, new RecordFrogJumpAction());
             // script.AddAction(Constants.UPDATE, new CollideBordersAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CollideBrickAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CollideRacketAction(PhysicsService, AudioService));

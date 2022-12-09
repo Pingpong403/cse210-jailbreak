@@ -92,10 +92,10 @@ namespace Unit06.Game.Casting
         /// </summary>
         /// <param name="acc">The acceleration.</param>
         /// <returns>The new, accelerated point.</returns>
-        public Point Accelerate(int acc)
+        public Point Accelerate(double acc)
         {
-            int x = _x;
-            int y = _y;
+            double x = _x;
+            double y = _y;
             if (_x != 0)
             {
                 x = _x + (_x > 0 ? acc : acc * -1);
@@ -104,7 +104,7 @@ namespace Unit06.Game.Casting
             {
                 y = _y + (_y > 0 ? acc : acc * -1);
             }
-            return new Point(x, y);
+            return new Point((int)x, (int)y);
         }
     }
 }

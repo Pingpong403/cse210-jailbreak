@@ -106,12 +106,12 @@ namespace Unit06
         public static List<string> FROG_IMAGES
             = new List<string>() {
                 "Assets/Images/5011.png",
-                "Assets/Images/5021.png",
-                "Assets/Images/5031.png",
-                "Assets/Images/5041.png",
                 "Assets/Images/5012.png",
+                "Assets/Images/5021.png",
                 "Assets/Images/5022.png",
+                "Assets/Images/5031.png",
                 "Assets/Images/5032.png",
+                "Assets/Images/5041.png",
                 "Assets/Images/5042.png"
             };
         public static int FROG_SIT_INDEX = 0;
@@ -122,8 +122,9 @@ namespace Unit06
         public static int FROG_JUMP_HEIGHT = 38;
         public static int FROG_JUMP_VERTICAL_CENTER = 17;
         public static double FROG_SCALE = 0.1;
-        public static int FROG_JUMP_ACCELERATION = -1;
-        public static int FROG_JUMP_INIT_VELOCITY = 5;
+        public static double FROG_JUMP_ACCELERATION = -0.05;
+        public static int FROG_JUMP_INIT_VELOCITY = 8;
+        public static int FROG_JUMP_DISTANCE = 32;
 
         // OBSTACLES
         public static string OBSTACLE_GROUP = "obstacles";

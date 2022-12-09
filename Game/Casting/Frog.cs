@@ -13,6 +13,10 @@ namespace Unit06.Game.Casting
         private bool _jumping;
         private Point _lastJumpPosition;
         private int _direction;
+        private bool _canJumpUp = true;
+        private bool _canJumpRight = true;
+        private bool _canJumpDown = true;
+        private bool _canJumpLeft = true;
         
         /// <summary>
         /// Constructs a new instance of Frog.
@@ -134,6 +138,63 @@ namespace Unit06.Game.Casting
             _image = _images[Constants.FROG_SIT_INDEX + 2 * _direction];
             _jumping = false;
             _lastJumpPosition = _body.GetPosition();
+        }
+
+        /// <summary>
+        /// Control which direction the frog can jump.
+        /// </summary>
+        public void ControlJump(string direction, bool control)
+        {
+            if (direction == "up")
+            {
+                _canJumpUp = control;
+            }
+            else if (direction == "right")
+            {
+                _canJumpRight = control;
+            }
+            else if (direction == "down")
+            {
+                _canJumpDown = control;
+            }
+            else if (direction == "left")
+            {
+                _canJumpLeft = control;
+            }
+            else
+            {
+                throw new System.Exception($"direction '{direction}' not recognized");
+            }
+        }
+
+        /// <summary>
+        /// Check if the frog can move in the given direction.
+        /// </summary>
+        /// <returns>True if the frog can move in the direction, false if otherwise.
+        /// </returns>
+        /// <param name="direction">The direction to check.</param>
+        public bool CanJump(string direction)
+        {
+            if (direction == "up")
+            {
+                return _canJumpUp;
+            }
+            else if (direction == "right")
+            {
+                return _canJumpRight;
+            }
+            else if (direction == "down")
+            {
+                return _canJumpDown;
+            }
+            else if (direction == "left")
+            {
+                return _canJumpLeft;
+            }
+            else
+            {
+                throw new System.Exception($"direction '{direction}' not recognized");
+            }
         }
     }
 }

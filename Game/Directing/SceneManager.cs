@@ -61,7 +61,7 @@ namespace Unit06.Game.Directing
             AddInitActions(script);
             AddLoadActions(script);
 
-            ChangeSceneAction a = new ChangeSceneAction(KeyboardService, Constants.NEXT_LEVEL);
+            ChangeSceneAction a = new ChangeSceneAction(KeyboardService, Constants.IN_PLAY);
             script.AddAction(Constants.INPUT, a);
 
             AddOutputActions(script);
@@ -81,9 +81,9 @@ namespace Unit06.Game.Directing
 
         private void PrepareNextLevel(Cast cast, Script script)
         {
-            // AddBall(cast);
-            // AddBricks(cast);
-            // AddRacket(cast);
+            AddFrog(cast);
+            AddTiles(cast);
+            AddObstacles(cast);
             AddDialog(cast, Constants.PREP_TO_LAUNCH);
 
             script.ClearAllActions();
@@ -97,18 +97,19 @@ namespace Unit06.Game.Directing
             script.AddAction(Constants.OUTPUT, sa);
         }
 
+        // IMPLEMENT DEATH SCENE
         private void PrepareTryAgain(Cast cast, Script script)
         {
-            // AddBall(cast);
-            // AddRacket(cast);
-            AddDialog(cast, Constants.PREP_TO_LAUNCH);
+            script.ClearAllActions();
+
+            AddFrog(cast);
+            AddDialog(cast, Constants.YOU_DIED);
 
             script.ClearAllActions();
             
             TimedChangeSceneAction ta = new TimedChangeSceneAction(Constants.IN_PLAY, 2, DateTime.Now);
             script.AddAction(Constants.INPUT, ta);
             
-            AddUpdateActions(script);
             AddOutputActions(script);
         }
 
@@ -124,7 +125,6 @@ namespace Unit06.Game.Directing
 
             AddUpdateActions(script);    
             AddOutputActions(script);
-        
         }
 
         private void PrepareGameOver(Cast cast, Script script)
@@ -355,7 +355,7 @@ namespace Unit06.Game.Directing
             cast.ClearActors(Constants.FROG_GROUP);
         
             int x = Constants.CENTER_X - Constants.FROG_WIDTH / 2;
-            int y = Constants.SCREEN_HEIGHT - Constants.FROG_SIT_HEIGHT;
+            int y = Constants.SCREEN_HEIGHT - Constants.FROG_SIT_HEIGHT - (Constants.TILE_SIZE - Constants.FROG_SIT_HEIGHT) / 2;
         
             Point position = new Point(x, y);
             Point size = new Point(Constants.FROG_WIDTH, Constants.FROG_SIT_HEIGHT);
@@ -365,7 +365,7 @@ namespace Unit06.Game.Directing
             List<Image> images = new List<Image>();
             foreach (string imageFile in Constants.FROG_IMAGES)
             {
-                images.Add(new Image(imageFile, Constants.FROG_SCALE));
+                images.Add(new Image(imageFile));
             }
             Frog frog = new Frog(body, images, false);
         
@@ -448,9 +448,8 @@ namespace Unit06.Game.Directing
             script.AddAction(Constants.UPDATE, new MoveObstaclesAction());
             script.AddAction(Constants.UPDATE, new MoveFrogAction());
             script.AddAction(Constants.UPDATE, new RecordFrogJumpAction());
-            // script.AddAction(Constants.UPDATE, new CollideBordersAction(PhysicsService, AudioService));
-            // script.AddAction(Constants.UPDATE, new CollideBrickAction(PhysicsService, AudioService));
-            // script.AddAction(Constants.UPDATE, new CollideRacketAction(PhysicsService, AudioService));
+            script.AddAction(Constants.UPDATE, new CollideBordersAction());
+            script.AddAction(Constants.UPDATE, new CollideObstaclesAction(PhysicsService, AudioService));
             // script.AddAction(Constants.UPDATE, new CheckOverAction());     
         }
     }

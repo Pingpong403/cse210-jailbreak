@@ -19,19 +19,19 @@ namespace Unit06.Game.Scripting
 
             if (!frog.IsJumping())
             {
-                if (_keyboardService.IsKeyPressed(Constants.LEFT))
+                if (_keyboardService.IsKeyPressed(Constants.LEFT) && frog.CanJump("left"))
                 {
                     frog.JumpLeft();
                 }
-                else if (_keyboardService.IsKeyPressed(Constants.RIGHT))
+                else if (_keyboardService.IsKeyPressed(Constants.RIGHT) && frog.CanJump("right"))
                 {
                     frog.JumpRight();
                 }
-                else if (_keyboardService.IsKeyPressed(Constants.UP))
+                else if (_keyboardService.IsKeyPressed(Constants.UP) && frog.CanJump("up"))
                 {
                     frog.JumpUp();
                 }
-                else if (_keyboardService.IsKeyPressed(Constants.DOWN))
+                else if (_keyboardService.IsKeyPressed(Constants.DOWN) && frog.CanJump("down"))
                 {
                     frog.JumpDown();
                 }

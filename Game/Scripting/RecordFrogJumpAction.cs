@@ -21,8 +21,6 @@ namespace Unit06.Game.Scripting
             Point frogLastJump = frog.GetLastJumpPosition();
             Point frogCurrentPosition = frog.GetBody().GetPosition();
 
-            Console.WriteLine(frogCurrentPosition.GetX() + ", " + _currentJump);
-
             // Up
             if (frog.GetDirection() == 0)
             {

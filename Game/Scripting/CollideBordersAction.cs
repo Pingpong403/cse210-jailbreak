@@ -1,64 +1,72 @@
-// NEW FUNCTION: PREVENT FROG FROM JUMPING OFF-SCREEN
+using Unit06.Game.Casting;
+using Unit06.Game.Services;
+using System;
 
 
-// using Unit06.Game.Casting;
-// using Unit06.Game.Services;
-
-
-// namespace Unit06.Game.Scripting
-// {
-//     public class CollideBordersAction : Action
-//     {
-//         private AudioService _audioService;
-//         private PhysicsService _physicsService;
+namespace Unit06.Game.Scripting
+{
+    public class CollideBordersAction : Action
+    {
         
-//         public CollideBordersAction(PhysicsService physicsService, AudioService audioService)
-//         {
-//             this._physicsService = physicsService;
-//             this._audioService = audioService;
-//         }
+        public CollideBordersAction()
+        {
+        }
 
-//         public void Execute(Cast cast, Script script, ActionCallback callback)
-//         {
-//             Ball ball = (Ball)cast.GetFirstActor(Constants.BALL_GROUP);
-//             Body body = ball.GetBody();
-//             Point position = body.GetPosition();
-//             int x = position.GetX();
-//             int y = position.GetY();
-//             Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
-//             Sound overSound = new Sound(Constants.OVER_SOUND);
+        public void Execute(Cast cast, Script script, ActionCallback callback)
+        {
+            Frog frog = (Frog)cast.GetFirstActor(Constants.FROG_GROUP);
+            Body body = frog.GetBody();
+            Point position = body.GetPosition();
+            int x = position.GetX();
+            int y = position.GetY();
+            int leftEdge = x;
+            int rightEdge = x + Constants.FROG_WIDTH;
+            int topEdge = y;
+            int bottomEdge = y + Constants.FROG_SIT_HEIGHT;
 
-//             if (x < Constants.FIELD_LEFT)
-//             {
-//                 ball.BounceX();
-//                 _audioService.PlaySound(bounceSound);
-//             }
-//             else if (x >= Constants.FIELD_RIGHT - Constants.BALL_WIDTH)
-//             {
-//                 ball.BounceX();
-//                 _audioService.PlaySound(bounceSound);
-//             }
-
-//             if (y < Constants.FIELD_TOP)
-//             {
-//                 ball.BounceY();
-//                 _audioService.PlaySound(bounceSound);
-//             }
-//             else if (y >= Constants.FIELD_BOTTOM - Constants.BALL_WIDTH)
-//             {
-//                 Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-//                 stats.RemoveLife();
-
-//                 if (stats.GetLives() > 0)
-//                 {
-//                     callback.OnNext(Constants.TRY_AGAIN);
-//                 }
-//                 else
-//                 {
-//                     callback.OnNext(Constants.GAME_OVER);
-//                     _audioService.PlaySound(overSound);
-//                 }
-//             }
-//         }
-//     }
-// }
+            // Left
+            if (leftEdge <= Constants.TILE_SIZE / 2)
+            {
+                frog.ControlJump("left", false);
+            }
+            else
+            {
+                frog.ControlJump("left", true);
+            }
+            // Right
+            if (rightEdge >= Constants.SCREEN_WIDTH - Constants.TILE_SIZE / 2)
+            {
+                frog.ControlJump("right", false);
+            }
+            else
+            {
+                frog.ControlJump("right", true);
+            }
+            // Top
+            if (topEdge <= Constants.TILE_SIZE / 2)
+            {
+                if (x > Constants.CENTER_X + Constants.TILE_SIZE / 2 || x < Constants.CENTER_X - Constants.TILE_SIZE / 2)
+                {
+                    frog.ControlJump("up", false);
+                }
+                else
+                {
+                    frog.ControlJump("up", true);
+                }
+            }
+            else
+            {
+                frog.ControlJump("up", true);
+            }
+            // Bottom
+            if (bottomEdge >= Constants.SCREEN_HEIGHT - Constants.TILE_SIZE / 2)
+            {
+                frog.ControlJump("down", false);
+            }
+            else
+            {
+                frog.ControlJump("down", true);
+            }
+        }
+    }
+}

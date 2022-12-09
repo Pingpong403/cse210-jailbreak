@@ -59,6 +59,7 @@ namespace Unit06
 
         // SCENES
         public static string NEW_GAME = "new_game";
+        public static string DEATH_SCENE = "death_scene";
         public static string TRY_AGAIN = "try_again";
         public static string NEXT_LEVEL = "next_level";
         public static string IN_PLAY = "in_play";
@@ -67,7 +68,7 @@ namespace Unit06
         // LEVELS
         public static string LEVEL_TILES_FILE = "Assets/Data/TileMaps/level-{0:000}.txt";
         public static string LEVEL_OBSTACLES_FILE = "Assets/Data/ObstacleMaps/level-{0:000}.txt";
-        public static int BASE_LEVELS = 1;
+        public static int BASE_LEVELS = 3;
 
         // ----------------------------------------------------------------------------------------- 
         // SCRIPTING CONSTANTS
@@ -265,6 +266,7 @@ namespace Unit06
         public static string DIALOG_GROUP = "dialogs";
         public static string ENTER_TO_START = "PRESS ENTER TO START";
         public static string PREP_TO_LAUNCH = "PREPARING TO LAUNCH";
+        public static string YOU_DIED = "YOU DIED";
         public static string WAS_GOOD_GAME = "GAME OVER";
 
     }

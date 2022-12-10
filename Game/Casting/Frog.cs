@@ -13,10 +13,14 @@ namespace Unit06.Game.Casting
         private bool _jumping;
         private Point _lastJumpPosition;
         private int _direction;
-        private bool _canJumpUp = true;
-        private bool _canJumpRight = true;
-        private bool _canJumpDown = true;
-        private bool _canJumpLeft = true;
+        private Dictionary<string, bool> _canJump
+            = new Dictionary<string, bool>()
+                {
+                    {"up" , true},
+                    {"right", true},
+                    {"down", true},
+                    {"left", true}
+                };
         
         /// <summary>
         /// Constructs a new instance of Frog.
@@ -145,21 +149,9 @@ namespace Unit06.Game.Casting
         /// </summary>
         public void ControlJump(string direction, bool control)
         {
-            if (direction == "up")
+            if (_canJump.ContainsKey(direction))
             {
-                _canJumpUp = control;
-            }
-            else if (direction == "right")
-            {
-                _canJumpRight = control;
-            }
-            else if (direction == "down")
-            {
-                _canJumpDown = control;
-            }
-            else if (direction == "left")
-            {
-                _canJumpLeft = control;
+                _canJump[direction] = control;
             }
             else
             {
@@ -175,21 +167,9 @@ namespace Unit06.Game.Casting
         /// <param name="direction">The direction to check.</param>
         public bool CanJump(string direction)
         {
-            if (direction == "up")
+            if (_canJump.ContainsKey(direction))
             {
-                return _canJumpUp;
-            }
-            else if (direction == "right")
-            {
-                return _canJumpRight;
-            }
-            else if (direction == "down")
-            {
-                return _canJumpDown;
-            }
-            else if (direction == "left")
-            {
-                return _canJumpLeft;
+                return _canJump[direction];
             }
             else
             {

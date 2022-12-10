@@ -15,10 +15,10 @@ namespace Unit06
         public static int FRAME_RATE = 60;
 
         // SCREEN
-        public static int TILE_NUMBERS_WIDTH = 10;
-        public static int TILE_NUMBERS_HEIGHT = 16;
-        public static int SCREEN_WIDTH = 320;
-        public static int SCREEN_HEIGHT = 512;
+        public static int TILE_NUMBERS_WIDTH = 15;
+        public static int TILE_NUMBERS_HEIGHT = 24;
+        public static int SCREEN_WIDTH = 480;
+        public static int SCREEN_HEIGHT = 768;
         public static int CENTER_X = SCREEN_WIDTH / 2;
         public static int CENTER_Y = SCREEN_HEIGHT / 2;
 
@@ -150,8 +150,8 @@ namespace Unit06
         public static int CAR_WIDTH = 57;
         public static int CAR_HEIGHT = 28;
         public static double CAR_SCALE = 0.1;
-        public static int CAR_VELOCITY = 5;
-        public static int POLICE_CAR_VELOCITY = 7;
+        public static int CAR_VELOCITY = 3;
+        public static int POLICE_CAR_VELOCITY = 4;
 
         // TRICYCLES
 
@@ -172,7 +172,7 @@ namespace Unit06
         public static int TRICYCLE_WIDTH = 28;
         public static int TRICYCLE_HEIGHT = 28;
         public static double TRICYCLE_SCALE = 0.1;
-        public static int TRICYCLE_VELOCITY = 3;
+        public static int TRICYCLE_VELOCITY = 1;
 
         // LOGS
 
@@ -187,14 +187,13 @@ namespace Unit06
             };
 
         public static int LOG_WIDTH = 35;
-        public static int PLAIN_LOG_HEIGHT = 16;
-        public static int DETAIL_LOG_HEIGHT = 28;
+        public static int LOG_HEIGHT = 28;
         public static double LOG_SCALE = 0.1;
         public static List<int> LOG_VELOCITIES
             = new List<int>() {
+                1,
                 2,
-                4,
-                6
+                3
             };
 
         // TILES

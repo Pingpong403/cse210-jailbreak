@@ -48,11 +48,10 @@ namespace Unit06.Game.Directing
 
         private void PrepareNewGame(Cast cast, Script script)
         {
-            AddTiles(cast);
             AddStats(cast);
             AddLevel(cast);
-            AddScore(cast);
             AddLives(cast);
+            AddTiles(cast);
             AddObstacles(cast);
             AddFrog(cast);
             AddDialog(cast, Constants.ENTER_TO_START);
@@ -97,7 +96,6 @@ namespace Unit06.Game.Directing
             script.AddAction(Constants.OUTPUT, sa);
         }
 
-        // IMPLEMENT DEATH SCENE
         private void PrepareTryAgain(Cast cast, Script script)
         {
             script.ClearAllActions();
@@ -150,8 +148,7 @@ namespace Unit06.Game.Directing
             cast.ClearActors(Constants.OBSTACLE_GROUP);
         
             Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-            // int level = stats.GetLevel() % Constants.BASE_LEVELS;
-            int level = 1;
+            int level = stats.GetLevel() % Constants.BASE_LEVELS;
             string filename = string.Format(Constants.LEVEL_OBSTACLES_FILE, level);
             List<List<string>> rows = LoadLevel(filename);
 
@@ -171,7 +168,7 @@ namespace Unit06.Game.Directing
                         x += (Constants.TILE_SIZE - Constants.TRICYCLE_WIDTH) / 2;
                         y += (Constants.TILE_SIZE - Constants.TRICYCLE_HEIGHT) / 2;
                         Point position = new Point(x, y);
-                        Point size = new Point((int)(Constants.TRICYCLE_WIDTH * Constants.TRICYCLE_SCALE), (int)(Constants.TRICYCLE_HEIGHT * Constants.TRICYCLE_SCALE));
+                        Point size = new Point(Constants.TRICYCLE_WIDTH, Constants.TRICYCLE_HEIGHT);
                         Point velocity = new Point((direction == 0) ? Constants.TRICYCLE_VELOCITY : -Constants.TRICYCLE_VELOCITY, 0);
                         Body body = new Body(position, size, velocity);
 
@@ -183,7 +180,7 @@ namespace Unit06.Game.Directing
                         int randomIndex = _random.Next(randomIndexStartRange, randomIndexStartRange + Constants.TRICYCLE_IMAGES.Count / 2);
                         string fileName = Constants.TRICYCLE_IMAGES[randomIndex];
                         int rotation = (direction == 0) ? 90 : 0; 
-                        Image image = new Image(fileName, Constants.TRICYCLE_SCALE, rotation);
+                        Image image = new Image(fileName, 1, rotation);
 
                         Obstacle obstacle = new Obstacle(obstacleType, body, image, boolDirection);
                         cast.AddActor(Constants.OBSTACLE_GROUP, obstacle);
@@ -197,7 +194,7 @@ namespace Unit06.Game.Directing
                         x += (Constants.TILE_SIZE - (Constants.CAR_WIDTH / 2)) / 2;
                         y += (Constants.TILE_SIZE - Constants.CAR_HEIGHT) / 2;
                         Point position = new Point(x, y);
-                        Point size = new Point((int)(Constants.CAR_WIDTH * Constants.CAR_SCALE), (int)(Constants.CAR_HEIGHT * Constants.CAR_SCALE));
+                        Point size = new Point(Constants.CAR_WIDTH, Constants.CAR_HEIGHT);
                         Point velocity = new Point((direction == 0) ? Constants.CAR_VELOCITY : -Constants.CAR_VELOCITY, 0);
                         Body body = new Body(position, size, velocity);
 
@@ -209,7 +206,7 @@ namespace Unit06.Game.Directing
                         int randomIndex = _random.Next(randomIndexStartRange, randomIndexStartRange + Constants.CAR_IMAGES.Count / 2);
                         string fileName = Constants.CAR_IMAGES[randomIndex];
                         int rotation = (direction == 0) ? 90 : 0; 
-                        Image image = new Image(fileName, Constants.CAR_SCALE, rotation);
+                        Image image = new Image(fileName, 1, rotation);
 
                         Obstacle obstacle = new Obstacle(obstacleType, body, image, boolDirection);
                         cast.AddActor(Constants.OBSTACLE_GROUP, obstacle);
@@ -222,15 +219,15 @@ namespace Unit06.Game.Directing
                         int logSpeedIndex = (int)Char.GetNumericValue(rows[r][c][1]);
                         bool boolDirection = (direction == 0) ? true : false;
                         x += (Constants.TILE_SIZE - Constants.LOG_WIDTH) / 2;
-                        y += (Constants.TILE_SIZE - Constants.PLAIN_LOG_HEIGHT) / 2;
+                        y += (Constants.TILE_SIZE - Constants.LOG_HEIGHT) / 2;
                         Point position = new Point(x, y);
-                        Point size = new Point((int)(Constants.LOG_WIDTH * Constants.LOG_SCALE), (int)(Constants.PLAIN_LOG_HEIGHT * Constants.LOG_SCALE));
+                        Point size = new Point(Constants.LOG_WIDTH, Constants.LOG_HEIGHT);
                         Point velocity = new Point(-Constants.LOG_VELOCITIES[logSpeedIndex], 0);
                         Body body = new Body(position, size, velocity);
 
                         int randomIndex = _random.Next(Constants.LOG_IMAGES.Count);
                         string fileName = Constants.LOG_IMAGES[randomIndex];
-                        Image image = new Image(fileName, Constants.CAR_SCALE);
+                        Image image = new Image(fileName);
 
                         Obstacle obstacle = new Obstacle(obstacleType, body, image, boolDirection, logSpeedIndex);
                         cast.AddActor(Constants.OBSTACLE_GROUP, obstacle);
@@ -251,8 +248,7 @@ namespace Unit06.Game.Directing
             cast.ClearActors(Constants.TILE_GROUP);
 
             Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-            // int level = stats.GetLevel() % Constants.BASE_LEVELS;
-            int level = 1;
+            int level = stats.GetLevel();
             string filename = string.Format(Constants.LEVEL_TILES_FILE, level);
             List<List<string>> rows = LoadLevel(filename);
 
@@ -267,7 +263,7 @@ namespace Unit06.Game.Directing
                     int info = (int)Char.GetNumericValue(rows[r][c][1]);
 
                     Point position = new Point(x, y);
-                    Point size = new Point((int)(Constants.TILE_SIZE * Constants.TILE_SCALE), (int)(Constants.TILE_SIZE * Constants.TILE_SCALE));
+                    Point size = new Point(Constants.TILE_SIZE, Constants.TILE_SIZE);
                     Point velocity = new Point(0, 0);
 
                     int detail = (int)Char.GetNumericValue(rows[r][c][2]);
@@ -282,6 +278,10 @@ namespace Unit06.Game.Directing
                         else if (type == "ww")
                         {
                             tileIndex = 0;
+                        }
+                        else if (type == "gw" || type == "wg")
+                        {
+                            tileIndex= _random.Next(4);
                         }
                     }
                     else if (detail == 1)
@@ -303,7 +303,7 @@ namespace Unit06.Game.Directing
                     {
                         tileIndex = detail - 1;
                     }
-                    Image image = new Image(Constants.TILE_IMAGES[type][tileIndex], Constants.TILE_SCALE);
+                    Image image = new Image(Constants.TILE_IMAGES[type][tileIndex]);
 
                     Body body = new Body(position, size, velocity);
                     
@@ -347,7 +347,7 @@ namespace Unit06.Game.Directing
                 Constants.HUD_MARGIN);
 
             Label label = new Label(text, position);
-            cast.AddActor(Constants.LIVES_GROUP, label);   
+            cast.AddActor(Constants.LIVES_GROUP, label);
         }
 
         private void AddFrog(Cast cast)
@@ -370,18 +370,6 @@ namespace Unit06.Game.Directing
             Frog frog = new Frog(body, images, false);
         
             cast.AddActor(Constants.FROG_GROUP, frog);
-        }
-
-        private void AddScore(Cast cast)
-        {
-            cast.ClearActors(Constants.SCORE_GROUP);
-
-            Text text = new Text(Constants.SCORE_FORMAT, Constants.FONT_FILE, Constants.FONT_SIZE, 
-                Constants.ALIGN_CENTER, Constants.WHITE);
-            Point position = new Point(Constants.CENTER_X, Constants.HUD_MARGIN);
-            
-            Label label = new Label(text, position);
-            cast.AddActor(Constants.SCORE_GROUP, label);   
         }
 
         private void AddStats(Cast cast)
@@ -424,8 +412,8 @@ namespace Unit06.Game.Directing
         private void AddOutputActions(Script script)
         {
             script.AddAction(Constants.OUTPUT, new StartDrawingAction(VideoService));
-            script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawTilesAction(VideoService));
+            script.AddAction(Constants.OUTPUT, new DrawHudAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawObstaclesAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawRacketAction(VideoService));
             script.AddAction(Constants.OUTPUT, new DrawDialogAction(VideoService));
@@ -450,7 +438,7 @@ namespace Unit06.Game.Directing
             script.AddAction(Constants.UPDATE, new RecordFrogJumpAction());
             script.AddAction(Constants.UPDATE, new CollideBordersAction());
             script.AddAction(Constants.UPDATE, new CollideObstaclesAction(PhysicsService, AudioService));
-            // script.AddAction(Constants.UPDATE, new CheckOverAction());     
+            script.AddAction(Constants.UPDATE, new CheckOverAction());
         }
     }
 }

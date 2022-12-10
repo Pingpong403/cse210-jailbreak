@@ -28,11 +28,25 @@ namespace Unit06.Game.Scripting
                 int maxY = Constants.SCREEN_HEIGHT;
                 
                 Body body = obstacle.GetBody();
+                string type = obstacle.GetObstacleType();
                 Point position = body.GetPosition();
                 Point velocity = body.GetVelocity();
+                int obstacle_width = 0;
 
+                if (type == "log")
+                {
+                    obstacle_width = Constants.LOG_WIDTH;
+                } else if (type == "car" || type == "policeCar")
+                {
+                    obstacle_width = Constants.CAR_WIDTH;
+                } else if (type == "tricycle")
+                {
+                    obstacle_width = Constants.TRICYCLE_WIDTH;
+                } else
+                {}
+            
 
-                int x = ((position.GetX() + velocity.GetX()) + maxX) % maxX;
+                int x = ((position.GetX() + velocity.GetX()) + maxX) % maxX - obstacle_width;
                 int y = ((position.GetY() + velocity.GetY()) + maxY) % maxY;
                 position = new Point(x, y);
 

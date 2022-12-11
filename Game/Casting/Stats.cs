@@ -7,17 +7,14 @@ namespace Unit06.Game.Casting
     {
         private int _level;
         private int _lives;
-        private int _score;
 
         /// <summary>
         /// Constructs a new instance of Actor.
         /// </summary>
-        public Stats(int level = 1, int lives = 3, int score = 0, 
-                bool debug = false) : base(debug)
+        public Stats(int level = 1, int lives = 3, bool debug = false) : base(debug)
         {
             this._level = level;
             this._lives = lives;
-            this._score = score;
         }
 
         /// <summary>
@@ -37,15 +34,6 @@ namespace Unit06.Game.Casting
         }
 
         /// <summary>
-        /// Adds the given points to the score.
-        /// </summary>
-        /// <param name="points">The given points.</param>
-        public void AddPoints(int points)
-        {
-            _score += points;
-        }
-
-        /// <summary>
         /// Gets the level.
         /// </summary>
         /// <returns>The level.</returns>
@@ -61,15 +49,6 @@ namespace Unit06.Game.Casting
         public int GetLives()
         {
             return _lives;
-        }
-
-        /// <summary>
-        /// Gets the score.
-        /// </summary>
-        /// <returns>The score.</returns>
-        public int GetScore()
-        {
-            return _score;
         }
 
         /// <summary>

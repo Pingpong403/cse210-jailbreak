@@ -1,28 +1,28 @@
-// CHECK IF PRISONER GETS TO EXIT POINT FOR NEXT LEVEL
+using System;
+using Unit06.Game.Casting;
+using Unit06.Game.Services;
 
 
-// using System.Collections.Generic;
-// using Unit06.Game.Casting;
-// using Unit06.Game.Services;
+namespace Unit06.Game.Scripting
+{
+    public class CheckOverAction : Action
+    {
+        public CheckOverAction()
+        {
+        }
 
+        public void Execute(Cast cast, Script script, ActionCallback callback)
+        {
+            Frog frog = (Frog)cast.GetFirstActor(Constants.FROG_GROUP);
+            Body body = frog.GetBody();
+            int checkpointY = -Constants.TILE_SIZE / 2;
 
-// namespace Unit06.Game.Scripting
-// {
-//     public class CheckOverAction : Action
-//     {
-//         public CheckOverAction()
-//         {
-//         }
-
-//         public void Execute(Cast cast, Script script, ActionCallback callback)
-//         {
-//             List<Actor> bricks = cast.GetActors(Constants.BRICK_GROUP);
-//             if (bricks.Count == 0)
-//             {
-//                 Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-//                 stats.AddLevel();
-//                 callback.OnNext(Constants.NEXT_LEVEL);
-//             }
-//         }
-//     }
-// }
+            if (body.GetPosition().GetY() <= checkpointY)
+            {
+                Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
+                stats.AddLevel();
+                callback.OnNext(Constants.NEXT_LEVEL);
+            }
+        }
+    }
+}

@@ -232,6 +232,26 @@ namespace Unit06.Game.Directing
                         Obstacle obstacle = new Obstacle(obstacleType, body, image, boolDirection, logSpeedIndex);
                         cast.AddActor(Constants.OBSTACLE_GROUP, obstacle);
                     }
+                    else if (type == "p")
+                    {
+                        string obstacleType = "policeCar";
+
+                        int direction = (int)Char.GetNumericValue(rows[r][c][1]);
+                        bool boolDirection = (direction == 0) ? true : false;
+                        x += (Constants.TILE_SIZE - (Constants.CAR_WIDTH / 2)) / 2;
+                        y += (Constants.TILE_SIZE - Constants.CAR_HEIGHT) / 2;
+                        Point position = new Point(x, y);
+                        Point size = new Point(Constants.CAR_WIDTH, Constants.CAR_HEIGHT);
+                        Point velocity = new Point((direction == 0) ? Constants.POLICE_CAR_VELOCITY : -Constants.POLICE_CAR_VELOCITY, 0);
+                        Body body = new Body(position, size, velocity);
+
+                        string fileName = Constants.CAR_IMAGES[boolDirection ? Constants.POLICE_CAR_INDEX_RIGHT : Constants.POLICE_CAR_INDEX_LEFT];
+                        int rotation = (direction == 0) ? 90 : 0; 
+                        Image image = new Image(fileName, 1, rotation);
+
+                        Obstacle obstacle = new Obstacle(obstacleType, body, image, boolDirection);
+                        cast.AddActor(Constants.OBSTACLE_GROUP, obstacle);
+                    }
                     else if (type == "n")
                     {
                     }

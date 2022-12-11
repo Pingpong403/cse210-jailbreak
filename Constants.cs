@@ -146,7 +146,8 @@ namespace Unit06
                 "Assets/Images/6015.png"
             };
 
-        public static int POLICE_CAR_INDEX = 4;
+        public static int POLICE_CAR_INDEX_LEFT = 4;
+        public static int POLICE_CAR_INDEX_RIGHT = 9;
         public static int CAR_WIDTH = 57;
         public static int CAR_HEIGHT = 28;
         public static double CAR_SCALE = 0.1;

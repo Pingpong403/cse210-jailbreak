@@ -327,7 +327,7 @@ namespace Unit06.Game.Directing
 
                     Body body = new Body(position, size, velocity);
                     
-                    Tile tile = new Tile(body, image, false);
+                    Tile tile = new Tile(type, body, image, false);
                     cast.AddActor(Constants.TILE_GROUP, tile);
                 }
             }

@@ -29,7 +29,7 @@ namespace Unit06
         public static int FIELD_RIGHT = SCREEN_WIDTH;
 
         // FONT
-        public static string FONT_FILE = "Assets/Fonts/zorque.otf";
+        public static string FONT_FILE = "Assets/Fonts/dpcomic.otf";
         public static int FONT_SIZE = 32;
 
         // SOUND
@@ -265,7 +265,7 @@ namespace Unit06
         // DIALOG
         public static string DIALOG_GROUP = "dialogs";
         public static string ENTER_TO_START = "PRESS ENTER TO START";
-        public static string PREP_TO_LAUNCH = "PREPARING TO LAUNCH";
+        public static string PREP_TO_LAUNCH = "GET READY TO JUMP";
         public static string YOU_DIED = "YOU DIED";
         public static string WAS_GOOD_GAME = "GAME OVER";
 

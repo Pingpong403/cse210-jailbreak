@@ -454,7 +454,7 @@ namespace Unit06.Game.Directing
         private void AddUpdateActions(Script script)
         {
             script.AddAction(Constants.UPDATE, new MoveObstaclesAction());
-            script.AddAction(Constants.UPDATE, new MoveFrogAction());
+            script.AddAction(Constants.UPDATE, new MoveFrogAction(PhysicsService));
             script.AddAction(Constants.UPDATE, new RecordFrogJumpAction());
             script.AddAction(Constants.UPDATE, new CollideBordersAction());
             script.AddAction(Constants.UPDATE, new CollideObstaclesAction(PhysicsService, AudioService));

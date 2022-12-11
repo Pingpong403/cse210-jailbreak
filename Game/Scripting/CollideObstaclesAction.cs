@@ -24,6 +24,8 @@ namespace Unit06.Game.Scripting
             List<Actor> obstacles = cast.GetActors(Constants.OBSTACLE_GROUP);
             Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
             List<Actor> tiles = cast.GetActors(Constants.TILE_GROUP);
+            Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
+            Sound overSound = new Sound(Constants.OVER_SOUND);
 
             foreach (Actor actor in obstacles)
             {
@@ -31,8 +33,6 @@ namespace Unit06.Game.Scripting
                 Body obstacleBody = obstacle.GetBody();
                 string obstacleType = obstacle.GetObstacleType();
                 Body frogBody = frog.GetBody();
-                Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
-                Sound overSound = new Sound(Constants.OVER_SOUND);
 
                 if (_physicsService.HasCollided(obstacleBody, frogBody))
                 {
@@ -51,10 +51,6 @@ namespace Unit06.Game.Scripting
                             _audioService.PlaySound(overSound);
                         }
                     }
-                    else if (obstacleType == "log")
-                    {
-
-                    }
                 }
             }
             foreach (Actor actor in tiles)
@@ -63,24 +59,41 @@ namespace Unit06.Game.Scripting
                 Body tileBody = tile.GetBody();
                 string tileType = tile.GetTileType();
                 Body frogBody = frog.GetBody();
-                Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
-                Sound overSound = new Sound(Constants.OVER_SOUND);
 
-                if (_physicsService.HasCollided(tileBody, frogBody))
+                if (tileType == "ww")
                 {
-                    if (tileType == "ww")
+                    if (!frog.IsJumping())
                     {
-                        _audioService.PlaySound(bounceSound);
-                        stats.RemoveLife();
+                        if (_physicsService.HasCollided(tileBody, frogBody))
+                        {
+                            bool logCollided = false;
+                            foreach (Actor preObstacle in obstacles)
+                            {
+                                Obstacle obstacle = (Obstacle)preObstacle;
+                                if (obstacle.GetObstacleType() == "log")
+                                {
+                                    Body logBody = obstacle.GetBody();
+                                    if (_physicsService.HasCollided(frogBody, logBody))
+                                    {
+                                        logCollided = true;
+                                    }
+                                }
+                            }
+                            if (!logCollided)
+                            {
+                                _audioService.PlaySound(bounceSound);
+                                stats.RemoveLife();
 
-                        if (stats.GetLives() > 0)
-                        {
-                            callback.OnNext(Constants.TRY_AGAIN);
-                        }
-                        else
-                        {
-                            callback.OnNext(Constants.GAME_OVER);
-                            _audioService.PlaySound(overSound);
+                                if (stats.GetLives() > 0)
+                                {
+                                    callback.OnNext(Constants.TRY_AGAIN);
+                                }
+                                else
+                                {
+                                    callback.OnNext(Constants.GAME_OVER);
+                                    _audioService.PlaySound(overSound);
+                                }
+                            }
                         }
                     }
                 }

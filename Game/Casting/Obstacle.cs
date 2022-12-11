@@ -51,6 +51,15 @@ namespace Unit06.Game.Casting
         }
 
         /// <summary>
+        /// Gets the direction.
+        /// </summary>
+        /// <returns>The direction.</returns>
+        public bool GetDirection()
+        {
+            return _direction;
+        }
+
+        /// <summary>
         /// Releases obstacle in its given direction.
         /// </summary>
         public void Release()

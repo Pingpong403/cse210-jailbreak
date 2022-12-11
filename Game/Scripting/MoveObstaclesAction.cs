@@ -20,7 +20,6 @@ namespace Unit06.Game.Scripting
         public void Execute(Cast cast, Script script, ActionCallback callback)
         {
             List<Actor> obstacles = cast.GetActors(Constants.OBSTACLE_GROUP);
-            // int x = position.GetX();
 
             foreach (Obstacle obstacle in obstacles)
             {
@@ -28,30 +27,32 @@ namespace Unit06.Game.Scripting
                 int maxY = Constants.SCREEN_HEIGHT;
                 
                 Body body = obstacle.GetBody();
-                string type = obstacle.GetObstacleType();
                 Point position = body.GetPosition();
                 Point velocity = body.GetVelocity();
-                int obstacle_width = 0;
 
-                if (type == "log")
-                {
-                    obstacle_width = Constants.LOG_WIDTH;
-                } else if (type == "car" || type == "policeCar")
-                {
-                    obstacle_width = Constants.CAR_WIDTH;
-                } else if (type == "tricycle")
-                {
-                    obstacle_width = Constants.TRICYCLE_WIDTH;
-                } else
-                {}
-            
-
-                int x = ((position.GetX() + velocity.GetX()) + maxX) % maxX - obstacle_width;
-                int y = ((position.GetY() + velocity.GetY()) + maxY) % maxY;
+                int x = position.GetX() + velocity.GetX();
+                int y = position.GetY() + velocity.GetY();
                 position = new Point(x, y);
 
-                // position = position.Add(velocity);
-                body.SetPosition(position);
+                // WRAPPING
+                // Left
+                if (!obstacle.GetDirection())
+                {
+                    if (x <= -64)
+                    {
+                        x += Constants.SCREEN_WIDTH + 128;
+                    }
+                }
+                // Right
+                else
+                {
+                    if (x >= Constants.SCREEN_WIDTH)
+                    {
+                        x -= (Constants.SCREEN_WIDTH + 128);
+                    }
+                }
+
+                body.SetPosition(new Point(x, y));
             }
 
         

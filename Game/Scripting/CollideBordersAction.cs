@@ -45,7 +45,7 @@ namespace Unit06.Game.Scripting
             // Top
             if (topEdge <= Constants.TILE_SIZE / 2)
             {
-                if (x > Constants.CENTER_X + Constants.TILE_SIZE / 2 || x < Constants.CENTER_X - Constants.TILE_SIZE / 2)
+                if (x > Constants.CENTER_X + Constants.TILE_SIZE * 3.5|| x < Constants.CENTER_X - Constants.TILE_SIZE * 3.5)
                 {
                     frog.ControlJump("up", false);
                 }

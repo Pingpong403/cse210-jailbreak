@@ -30,18 +30,24 @@ namespace Unit06.Game.Scripting
                 Body obstacleBody = obstacle.GetBody();
                 string obstacleType = obstacle.GetObstacleType();
                 Body frogBody = frog.GetBody();
+                Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
+                Sound overSound = new Sound(Constants.OVER_SOUND);
 
                 if (_physicsService.HasCollided(obstacleBody, frogBody))
                 {
                     if (obstacleType != "log")
                     {
-                        Sound sound = new Sound(Constants.BOUNCE_SOUND);
-                        _audioService.PlaySound(sound);
+                        _audioService.PlaySound(bounceSound);
                         stats.RemoveLife();
 
                         if (stats.GetLives() > 0)
                         {
                             callback.OnNext(Constants.TRY_AGAIN);
+                        }
+                        else
+                        {
+                            callback.OnNext(Constants.GAME_OVER);
+                            _audioService.PlaySound(overSound);
                         }
                     }
                     else if (obstacleType == "log")

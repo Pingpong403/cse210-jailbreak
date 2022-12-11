@@ -148,7 +148,7 @@ namespace Unit06.Game.Directing
             cast.ClearActors(Constants.OBSTACLE_GROUP);
         
             Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-            int level = stats.GetLevel() % Constants.BASE_LEVELS;
+            int level = stats.GetLevel();
             string filename = string.Format(Constants.LEVEL_OBSTACLES_FILE, level);
             List<List<string>> rows = LoadLevel(filename);
 

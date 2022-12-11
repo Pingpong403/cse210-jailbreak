@@ -11,7 +11,7 @@ namespace Unit06.Game.Scripting
     {
         private AudioService _audioService;
         private PhysicsService _physicsService;
-        
+
         public CollideObstaclesAction(PhysicsService physicsService, AudioService audioService)
         {
             this._physicsService = physicsService;
@@ -23,7 +23,8 @@ namespace Unit06.Game.Scripting
             Frog frog = (Frog)cast.GetFirstActor(Constants.FROG_GROUP);
             List<Actor> obstacles = cast.GetActors(Constants.OBSTACLE_GROUP);
             Stats stats = (Stats)cast.GetFirstActor(Constants.STATS_GROUP);
-            
+            List<Actor> tiles = cast.GetActors(Constants.TILE_GROUP);
+
             foreach (Actor actor in obstacles)
             {
                 Obstacle obstacle = (Obstacle)actor;
@@ -53,6 +54,34 @@ namespace Unit06.Game.Scripting
                     else if (obstacleType == "log")
                     {
 
+                    }
+                }
+            }
+            foreach (Actor actor in tiles)
+            {
+                Tile tile = (Tile)actor;
+                Body tileBody = tile.GetBody();
+                string tileType = tile.GetTileType();
+                Body frogBody = frog.GetBody();
+                Sound bounceSound = new Sound(Constants.BOUNCE_SOUND);
+                Sound overSound = new Sound(Constants.OVER_SOUND);
+
+                if (_physicsService.HasCollided(tileBody, frogBody))
+                {
+                    if (tileType == "ww")
+                    {
+                        _audioService.PlaySound(bounceSound);
+                        stats.RemoveLife();
+
+                        if (stats.GetLives() > 0)
+                        {
+                            callback.OnNext(Constants.TRY_AGAIN);
+                        }
+                        else
+                        {
+                            callback.OnNext(Constants.GAME_OVER);
+                            _audioService.PlaySound(overSound);
+                        }
                     }
                 }
             }

@@ -1,3 +1,5 @@
+
+
 namespace Unit06.Game.Casting
 {
     /// <summary>
@@ -7,12 +9,14 @@ namespace Unit06.Game.Casting
     {
         private Body _body;
         private Image _image;
+        private string _type;
 
         /// <summary>
         /// Constructs a new instance of Tile.
         /// </summary>
-        public Tile(Body body, Image image, bool debug) : base(debug)
+        public Tile(string tileType, Body body, Image image, bool debug) : base(debug)
         {
+            this._type = tileType;
             this._body = body;
             this._image = image;
         }
@@ -34,6 +38,14 @@ namespace Unit06.Game.Casting
         {
             return _image;
         }
-        
+
+        /// <summary>
+        /// Gets the tile type.
+        /// </summary>
+        /// <returns>Tile type.</returns>
+        public string GetTileType()
+        {
+            return _type;   
+        }
     }
 }
